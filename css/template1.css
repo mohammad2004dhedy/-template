@@ -1,0 +1,465 @@
+:root {
+  --main-color: #10cab7;
+  --secondry-color: #2c4755;
+  --section-padding: 60px;
+  --section-background: rgba(153, 153, 153, 0.347);
+  --paragraph-color: #777;
+  --section-margin-top: 100px;
+  --main-transition:0.4s;
+}
+/* global style start */
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* to apply this property to browsers that use webkit and moz engins */
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Work Sans", sans-serif;
+}
+.scroller{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: red;
+  height: 5px;
+  width:0;
+  z-index: 200;
+}
+.container {
+  padding: 0 15px;
+  margin: 0 auto;
+}
+/* هاي الي هون بعمل الريسونسيفيتي للكونتينر عشان استعمله باي مكان 
+بالكود ويتحكملي بموقع المحتوى عنفس المستوى  وعملته بحيث انه عكل الشاشات يكون في مساحة على شماله ويمينه
+ما عدا الشاشات الي اصغر من 768 بكسل والي هي شاشات الجوالات عادة وفيها بوخذ عرض الاب كامل او الي هو 100 بالمية من عرض الشاشة */
+/* small screens */
+@media (min-width: 768px) {
+  /* الشاشات الي بتبلش من عرض 768 بكسل  */
+  .container {
+    width: 750px;
+  }
+}
+/* mediom screens */
+@media (min-width: 992px) {
+  /* الشاشات الي بتبلش من عرض 992 بكسل  */
+  .container {
+    width: 970px;
+  }
+}
+/* large screens */
+@media (min-width: 1200px) {
+  /* الشاشات الي بتبلش من عرض  1200 بكسل  */
+  .container {
+    width: 1170px;
+  }
+}
+/* global style end */
+/* general components start */
+
+.section-title {
+  font-size: 100px;
+  color: #ebeced;
+  text-align: center;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+.section-title + p {
+  margin: -35px 0 0 0;
+  text-align: center;
+  font-size: 20px;
+  color: #979797;
+}
+@media (max-width: 767px) {
+  .section-title {
+    font-size: 60px;
+  }
+  .section-title + p {
+    font-size: 15px;
+    margin-top: -20px;
+  }
+}
+/* general components end */
+
+/* header start */
+header {
+  padding: 20px;
+  z-index: 100;
+  position:fixed;
+  background-color: #fff;
+  width: 100%;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo {
+  width: 60px;
+}
+header .links {
+  position: relative;
+  /* عشان احرك الليست داخله وبناءا عليه*/
+}
+header .icon {
+  width: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+header .icon span {
+  background: #123;
+  height: 3px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+}
+header .icon span:first-child {
+  width: 100%;
+}
+header .icon span:nth-child(2) {
+  width: 60%;
+  transition:var(--main-transition);
+}
+header .icon span:last-child {
+  width: 100%;
+}
+.links:hover .icon span:nth-child(2) {
+  width: 100%;
+}
+header .links .list {
+  min-width: 200px;
+  list-style: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 25px);
+  background-color: #e4e4e4;
+  padding: 0;
+  margin: 0;
+  display: none;
+  z-index: 10;
+}
+.list::before {
+  content: "";
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent #e4e4e4 transparent;
+  position: absolute;
+  top: -32px;
+  right: 5px;
+}
+.links .list li a {
+  text-decoration: none;
+  color: #333;
+  padding: 15px;
+  display: block;
+  text-transform: capitalize;
+  transition:var(--main-transition);
+}
+.links .list li:not(:last-child) a {
+  border-bottom: solid 2px #444;
+}
+.links .list li a:hover {
+  padding-left: 25px;
+}
+.links:hover .list {
+  display: block;
+}
+/* header end */
+/* landing start */
+.landing {
+  height: calc(100vh);
+  background-image: url(../images/mount.jpeg);
+  background-size: cover;
+  position: relative;
+}
+.landing .landing-text {
+  width: 320px;
+  max-width: 100%;
+  /* الماكس ويدث عشان ما يطلع برا الشاشة اذا صغرت اكثر من الحجم الي محدده */
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.8;
+}
+.landing .landing-text h1 {
+  margin: 0;
+  color: var(--main-color);
+}
+.landing .landing-text p {
+}
+/* landing end */
+/*features sart  */
+.features {
+  padding: var(--section-padding) 20px;
+  background-color: var(--section-background);
+}
+.features .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  /* الجريد هون قلتلها تعبيلي الكونتينر كامل تلقائي بحيث انه كل واحد بكون اله ويدث معين */
+}
+.features .card {
+  border: solid 1px var(--paragraph-color);
+  border-radius: 8px;
+  text-align: center;
+  line-height: 1.8;
+  padding: 20px;
+}
+.features .card i {
+  color: var(--main-color);
+}
+.features .card h2 {
+  font-weight: 800;
+  margin: 20px 0;
+  font-size: 17px;
+}
+.features .card p {
+  color: #777;
+}
+/* features end */
+/* services start */
+.services {
+  padding: var(--section-padding) 0;
+}
+.services .services-content {
+  margin-top: var(--section-margin-top);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap:25px;
+}
+.services .services-content .col .serv {
+  display: flex;
+  border: solid 1px var(--paragraph-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+  gap: 25px;
+}
+.services .services-content .col .serv i {
+  color: var(--main-color);
+}
+.services .services-content .serv .serv-text h2 {
+  margin: 0 0 20px;
+}
+.services .services-content .serv .serv-text p {
+  font-weight: 300;
+  color: #777;
+  line-height: 1.6;
+}
+.services .services-content .serv .serv-text {
+  flex: 1;
+}
+@media (max-width: 767px) {
+  .services .services-content .col .serv {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+.services .services-content .image {
+  margin-top: 40px;
+  position: relative;
+  text-align: center;
+}
+.services .services-content .image::before {
+  content: "";
+  background-color: var(--secondry-color);
+  width: 100px;
+  height: calc(100% + 100px);
+  right: 0;
+  top: -50px;
+  position: absolute;
+  z-index: -1;
+}
+@media (max-width: 1199px) {
+  .services .services-content .image {
+    display: none;
+  }
+}
+.services .services-content .image img {
+  width: 260px;
+}
+
+/* services end */
+/* portflio start */
+.portfolio {
+  padding: var(--section-padding) 0;
+  background-color: var(--section-background);
+}
+.portfolio .portfolio-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  margin-top: var(--section-margin-top);
+}
+.portfolio .portfolio-content .card {
+  padding: 5px;
+  background-color: #fff;
+}
+.portfolio .portfolio-content .card img {
+  max-width: 100%;
+}
+.portfolio .portfolio-content .card .card-text {
+  padding: 15px;
+}
+.portfolio .portfolio-content .card .card-text h3 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.portfolio .portfolio-content .card .card-text p {
+  color: var(--paragraph-color);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* portflio end */
+/* About start */
+.about {
+  padding: 70px;
+}
+.about .about-content {
+  margin-top: var(--section-margin-top);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 991px) {
+  .about .about-content {
+    flex-direction: column;
+  }
+}
+.about .about-content .image {
+  width: 250px;
+  height: 375px;
+  position: relative;
+}
+@media (max-width: 991px) {
+  .about .about-content .image {
+    margin: 0 auto 60px;
+  }
+}
+.about .about-content .image img {
+  width: 100%;
+}
+.about .about-content .image::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  width: 100px;
+  height: calc(100% + 80px);
+  background-color: var(--section-background);
+  top: -40px;
+  z-index: -1;
+}
+.about .about-content .image::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 300px;
+  right: -143px;
+  border-left: solid 85px var(--main-color);
+  border-bottom: solid 100px var(--main-color);
+  top: -40px;
+  z-index: -1;
+}
+.about .about-content .about-text {
+  flex-basis: calc(100% - 500px);
+  /* هاي نقصت 500 عشان اعمل ويدث للتيكست بحيث انه يكون الويدث كامل ناقص الويدث تاع الصورة مع الرسمة تاعتها اضافةالى انه بدي اخلي مسافة بينهم */
+}
+
+.about .about-content .about-text p:first-of-type {
+  color: #111;
+  font-weight: bold;
+  margin-bottom: 50px;
+  text-align: left;
+  line-height: 2;
+}
+.about .about-content .about-text hr {
+  border-color: var(--main-color);
+  width: 50%;
+  display: inline-block;
+}
+.about .about-content .about-text p:last-of-type {
+  text-align: left;
+  color: var(--paragraph-color);
+  line-height: 2;
+}
+@media (max-width: 991px) {
+  .about .about-content .about-text p:last-of-type {
+    text-align: center;
+  }
+  .about .about-content .about-text p:first-of-type {
+    text-align: center;
+  }
+  .about .about-content .about-text hr {
+    display: block;
+    margin: auto;
+  }
+  .about .about-content .image::after {
+    display: none;
+  }
+  .about .about-content .image::before {
+    left: -5px;
+  }
+}
+/* About end */
+/* contact start */
+.contact {
+  padding: var(--section-padding) 10px;
+  background: var(--section-background);
+}
+.contact .info {
+  margin-top: var(--section-margin-top);
+  text-align: center;
+  line-height: 1.5;
+}
+.contact .info .text {
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: var(--secondry-color);
+  margin-bottom: 15px;
+}
+.contact .info .link {
+  color: var(--main-color);
+  font-size: 30px;
+  text-decoration: none;
+  display: block;
+  font-weight: 700;
+}
+.contact .info .social {
+  font-size:16px;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+}
+.contact .info .social i {
+  margin-left: 10px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+@media (max-width:767px){
+  .contact .info .link,
+  .contact .info .text{
+    font-size: 18px;
+  }
+}
+/* contact end */
+/* footer start */
+footer{
+  padding: 30px;
+  background: var(--secondry-color);
+  text-align: center;
+  color: white;
+}
+footer span{
+  font-weight: bold;
+  color: var(--main-color);
+}
+/* footer end */
